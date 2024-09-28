@@ -1,16 +1,26 @@
+<? 
+    $id = get_post_field( 'post_author' ); 
+    $author    = get_the_author_meta( 'display_name', $id );
+    $revisions = wp_get_post_revisions();
+
+    if ( $revisions ) {
+        $last_revision = reset( $revisions );
+        $last_editor_id = $last_revision->post_author;
+        $last_editor = get_the_author_meta( 'display_name', $last_editor_id );
+    }
+?>
+
 <footer class="entry-footer bip-footer">
   <p itemprop="author" itemscope itemtype="http://schema.org/Person">
     <?php
-      $prepared_by_tag = "<span itemprop='name'>{$prepared_by}</span>";
       /* translators: %s is the name of the original author of page contents */
-      printf( esc_html__( 'Information prepared by: %s', 'bip-pages' ), $prepared_by_tag );
+      printf( esc_html__( 'Information prepared by: %s', 'bip-pages' ), $author );
     ?>
   </p>
   <p itemprop="publisher" itemscope itemtype="http://schema.org/Person">
     <?php
-      $author_tag = "<span itemprop='name'>" . get_the_author_link() . '</span>';
       /* translators: %s is the name of the user who published the page (may be a link) */
-      printf( esc_html__( 'Published by: %s', 'bip-pages' ), $author_tag );
+      printf( esc_html__( 'Published by: %s', 'bip-pages' ), $last_editor );
     ?>
   </p>
   <p itemprop="datePublished">
