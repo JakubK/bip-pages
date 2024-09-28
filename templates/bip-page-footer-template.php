@@ -13,8 +13,9 @@
 <footer class="entry-footer bip-footer">
   <p itemprop="author" itemscope itemtype="http://schema.org/Person">
     <?php
+      $prepared_by_tag = "<span itemprop='name'>{$prepared_by}</span>";
       /* translators: %s is the name of the original author of page contents */
-      printf( esc_html__( 'Information prepared by: %s', 'bip-pages' ), $author );
+      printf( esc_html__( 'Information prepared by: %s', 'bip-pages' ), $prepared_by_tag );
     ?>
   </p>
   <p itemprop="publisher" itemscope itemtype="http://schema.org/Person">
